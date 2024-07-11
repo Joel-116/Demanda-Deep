@@ -75,7 +75,7 @@
         <p>&copy; 2024 Deep Sea. Todos os direitos reservados.</p>
     </footer>
 
-    <script>
+      <script>
         const entregas = [
             {
                 id: 1,
@@ -179,21 +179,24 @@
                         ruaDiv.innerHTML = `<p>${rua}</p>`;
                         const ruaEntregas = entregas.filter(entrega => entrega.rua === rua);
 
-                        ruaDiv.addEventListener('click', () => {
+                        ruaDiv.addEventListener('click', (event) => {
+                            event.stopPropagation(); // Impede a propagação do evento para os elementos pai
                             carregarEntregas(ruaEntregas);
                         });
 
                         bairroDiv.appendChild(ruaDiv);
                     });
 
-                    bairroDiv.addEventListener('click', () => {
+                    bairroDiv.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Impede a propagação do evento para os elementos pai
                         bairroDiv.classList.toggle('expandido');
                     });
 
                     cidadeDiv.appendChild(bairroDiv);
                 });
 
-                cidadeDiv.addEventListener('click', () => {
+                cidadeDiv.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Impede a propagação do evento para os elementos pai
                     cidadeDiv.classList.toggle('expandido');
                 });
 
