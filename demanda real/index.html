@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="shortcut icon" href="media/image/favicon.ico" type="image/x-icon">
+    <script src="scripts.js" defer></script>
+</head>
+
+<body>
+    <div class="barra-vazia"></div>
+    <header id="main-header">
+        <div class="logo">
+            <img src="media/image/logomoto.webp" alt="Logo com uma moto">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <img src="media/image/banner.png" alt="Banner">
+
+    </div>
+
+    <main>
+        <section id="produtos-section">
+            <h2>Produtos Disponíveis</h2>
+            <div id="produtos-container">
+                <div class="produto">
+                    <h3>Produto 1</h3>
+                    <p>Descrição do produto 1.</p>
+                    <button onclick="comprarProduto('Produto 1')">Comprar</button>
+
+                </div>
+                <div class="produto">
+                    <h3>Produto 2</h3>
+                    <p>Descrição do produto 2.</p>
+                    <button onclick="comprarProduto('Produto 2')">Comprar</button>
+                </div>
+                <!-- Adicione mais produtos conforme necessário -->
+
+
+
+            </div>
+
+            <div>
+                <img src="media/image/Nossos objetivos.png" alt="Objetivos da empresa">
+            </div>
+        </section>
+    </main>
+
+    <div id="customizacao-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Customização de Embalagem</h2>
+            <form id="customizacao-form">
+                <div>
+                    <label for="peso">Peso (kg):</label>
+                    <input type="number" id="peso" name="peso" required>
+                </div>
+                <div>
+                    <label for="distancia">Distância (km):</label>
+                    <input type="number" id="distancia" name="distancia" required>
+                </div>
+                <div>
+                    <label for="tempo">Tempo de deslocamento (min):</label>
+                    <input type="number" id="tempo" name="tempo" required>
+                </div>
+                <div>
+                    <label>
+                        Marque a caixa abaixo caso queira a embalagem customizada!
+                        <input type="checkbox" id="embalagem-customizada" name="embalagem-customizada">
+                    </label>
+                </div>
+                <div id="campos-embalagem" style="display: none;">
+                    <div>
+                        <label for="mensagem-personalizada">Mensagem Personalizada:</label>
+                        <textarea id="mensagem-personalizada" name="mensagem-personalizada" rows="4"></textarea>
+                    </div>
+                    <div>
+                        <label for="tipo-embalagem">Tipo de Embalagem:</label>
+                        <select id="tipo-embalagem" name="tipo-embalagem">
+                            <option value="simples">Simples</option>
+                            <option value="presente">Presente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Valor do Frete: R$ <span id="valor-frete">0.00</span></label>
+                </div>
+                <button type="submit">Confirmar Compra</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Endereço: Av. Exemplo, 123 - Cidade Exemplo</li>
+                    <li><i class="fas fa-phone-alt"></i> Telefone: (00) 1234-5678</li>
+                    <li><i class="fas fa-envelope"></i> Email: <a
+                            href="mailto:contato@LapExpress.com">contato@LapExpress.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Siga-nos</h4>
+                <ul class="social-icons">
+                    <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a></li>
+                    <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a>Twitter</li>
+                    <li><a href="#" target="_blank"><i class="fab fa-instagram"></i>Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lap Express. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    function calcularFrete() {
+        const peso = parseFloat(document.getElementById('peso').value);
+        const distancia = parseFloat(document.getElementById('distancia').value);
+        const tempo = parseFloat(document.getElementById('tempo').value);
+
+        let valorPeso = 0;
+        if (peso < 1) {
+            valorPeso = 3.00;
+        } else if (peso >= 1 && peso < 3) {
+            valorPeso = 5.00;
+        } else if (peso >= 3 && peso < 8) {
+            valorPeso = 9.00;
+        } else if (peso >= 8 && peso < 12) {
+            valorPeso = 12.00;
+        } else {
+            alert('Peso acima do permitido para transporte.');
+            return;
+        }
+
+        const valorDistancia = distancia * 0.50;
+        const valorTempo = tempo * 0.30;
+        const valorFrete = valorPeso + valorDistancia + valorTempo;
+
+        document.getElementById('valor-frete').innerText = valorFrete.toFixed(2);
+    }
+
+    function comprarProduto(produto) {
+        const modal = document.getElementById('customizacao-modal');
+        modal.style.display = 'block';
+
+        document.getElementById('customizacao-form').addEventListener('input', calcularFrete);
+    }
+
+    document.getElementById('embalagem-customizada').addEventListener('change', function () {
+        var camposEmbalagem = document.getElementById('campos-embalagem');
+        camposEmbalagem.style.display = this.checked ? 'block' : 'none';
+        // Habilita ou desabilita os campos conforme o checkbox esteja marcado ou não
+        var camposParaHabilitar = camposEmbalagem.querySelectorAll('textarea, select');
+        camposParaHabilitar.forEach(function (campo) {
+            campo.disabled = !this.checked;
+        }, this);
+    });
+
+    window.onclick = function (event) {
+        const modal = document.getElementById('customizacao-modal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+
+</html>

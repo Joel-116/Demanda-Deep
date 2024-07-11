@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="scripts.js"></script>
+    <style>
+        .cidade,
+        .bairro,
+        .rua {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .bairro,
+        .rua {
+            display: none;
+        }
+
+        .expandido>.bairro {
+            display: block;
+        }
+
+        .bairro.expandido>.rua {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <br><br><br>
+    <header>
+        <h1>Administração - Sistema de Gestão de Entregas</h1>
+        <nav>
+            <ul>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="navegacao-section">
+            <h2>Navegação de Entregas</h2>
+            <div id="navegacao-container">
+                <!-- Navegação de cidades, bairros e ruas será inserida aqui -->
+            </div>
+        </section>
+
+        <section id="entregas-section">
+            <h2>Entregas Registradas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Motoboy</th>
+                        <th>Peso</th>
+                        <th>Distância</th>
+                        <th>Tempo</th>
+                        <th>Valor do Frete</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="entregas-tbody">
+                    <!-- Entregas serão inseridas aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Deep Sea. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const entregas = [
+            {
+                id: 1,
+                cliente: 'João Silva',
+                motoboy: 'Carlos Santos',
+                peso: 2,
+                distancia: 5,
+                tempo: 15,
+                valorFrete: 8.5,
+                status: 'Finalizada',
+                cidade: 'Juiz de Fora',
+                bairro: 'Centro',
+                rua: 'Rua A, 123'
+            },
+            {
+                id: 2,
+                cliente: 'Maria Oliveira',
+                motoboy: 'Pedro Souza',
+                peso: 4,
+                distancia: 10,
+                tempo: 25,
+                valorFrete: 14.5,
+                status: 'Em andamento',
+                cidade: 'Juiz de Fora',
+                bairro: 'Jardim',
+                rua: 'Rua B, 456'
+            },
+            {
+                id: 3,
+                cliente: 'Carlos Mendes',
+                motoboy: 'Cleide Pinheiro',
+                peso: 3,
+                distancia: 7,
+                tempo: 20,
+                valorFrete: 12.0,
+                status: 'Em andamento',
+                cidade: 'Juiz de Fora',
+                bairro: 'São Mateus',
+                rua: 'Rua C, 789'
+            },
+            {
+                id: 4,
+                cliente: 'Dalva Santos',
+                motoboy: 'Nenhum',
+                peso: 3,
+                distancia: 7,
+                tempo: 20,
+                valorFrete: 15.5,
+                status: 'Em andamento',
+                cidade: 'Juiz de Fora',
+                bairro: 'Centro',
+                rua: 'Rua D, 456'
+            },
+            {
+                id: 5,
+                cliente: 'Lucas Pereira',
+                motoboy: 'Maria Ferreira',
+                peso: 2,
+                distancia: 5,
+                tempo: 15,
+                valorFrete: 10.0,
+                status: 'Finalizada',
+                cidade: 'Juiz de Fora',
+                bairro: 'Santa Luzia',
+                rua: 'Rua E, 123'
+            },
+            {
+                id: 6,
+                cliente: 'Ana Clara',
+                motoboy: 'José da Silva',
+                peso: 4,
+                distancia: 10,
+                tempo: 25,
+                valorFrete: 14.5,
+                status: 'Em andamento',
+                cidade: 'Juiz de Fora',
+                bairro: 'Jardim',
+                rua: 'Rua F, 456'
+            }
+        ];
+
+        function carregarNavegacao() {
+            const navegacaoContainer = document.getElementById('navegacao-container');
+            const cidades = [...new Set(entregas.map(entrega => entrega.cidade))];
+
+            cidades.forEach(cidade => {
+                const cidadeDiv = document.createElement('div');
+                cidadeDiv.classList.add('cidade');
+                cidadeDiv.innerHTML = `<h3>${cidade}</h3>`;
+                const bairros = [...new Set(entregas.filter(entrega => entrega.cidade === cidade).map(entrega => entrega.bairro))];
+
+                bairros.forEach(bairro => {
+                    const bairroDiv = document.createElement('div');
+                    bairroDiv.classList.add('bairro');
+                    bairroDiv.innerHTML = `<h4>${bairro}</h4>`;
+                    const ruas = [...new Set(entregas.filter(entrega => entrega.bairro === bairro && entrega.cidade === cidade).map(entrega => entrega.rua))];
+
+                    ruas.forEach(rua => {
+                        const ruaDiv = document.createElement('div');
+                        ruaDiv.classList.add('rua');
+                        ruaDiv.innerHTML = `<p>${rua}</p>`;
+                        const ruaEntregas = entregas.filter(entrega => entrega.rua === rua);
+
+                        ruaDiv.addEventListener('click', () => {
+                            carregarEntregas(ruaEntregas);
+                        });
+
+                        bairroDiv.appendChild(ruaDiv);
+                    });
+
+                    bairroDiv.addEventListener('click', () => {
+                        bairroDiv.classList.toggle('expandido');
+                    });
+
+                    cidadeDiv.appendChild(bairroDiv);
+                });
+
+                cidadeDiv.addEventListener('click', () => {
+                    cidadeDiv.classList.toggle('expandido');
+                });
+
+                navegacaoContainer.appendChild(cidadeDiv);
+            });
+        }
+
+        function carregarEntregas(entregasParaMostrar) {
+            const tbody = document.getElementById('entregas-tbody');
+            tbody.innerHTML = '';
+            entregasParaMostrar.forEach(entrega => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entrega.id}</td>
+                    <td>${entrega.cliente}</td>
+                    <td>${entrega.motoboy}</td>
+                    <td>${entrega.peso} kg</td>
+                    <td>${entrega.distancia} km</td>
+                    <td>${entrega.tempo} min</td>
+                    <td>R$ ${entrega.valorFrete.toFixed(2)}</td>
+                    <td>${entrega.status}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        window.onload = carregarNavegacao;
+    </script>
+</body>
+
+</html>

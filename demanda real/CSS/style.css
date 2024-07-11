@@ -1,0 +1,375 @@
+/* Definindo variáveis de cores */
+:root {
+    --corprincipal: #703C98;
+    --corsecundaria: #fde74c;
+    --branco: #FFFFFF;
+    --cinzaclaro: #7e8d85;
+    --cinzaescuro: #3c493f;
+    --preto: #000000;
+    --lavanda: #C39BD3;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bar {
+    height: 20px; /* Ajuste conforme necessário */
+    background-color: var(--cinzaclaro);
+}
+
+/* Estilo geral para o body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--branco);
+    color: var(--cinzaescuro);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.barra-vazia {
+    height: 20px;
+    background-color: #333;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--branco);
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px #0000001a;
+    position: fixed;
+    top: 20px; /* Abaixo da barra vazia */
+    width: 100%;
+    height: 15%;
+    z-index: 1000;
+    transition: top 0.2s; /* Adiciona uma transição suave */
+}
+
+header.hidden {
+    top: 0; /* Move o header para o topo da página */
+}
+
+.logo img {
+    height: 60px; /* Altura da logo ajustada */
+    width: auto; /* Mantém a proporção da logo */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.banner {
+    position: relative;
+    margin-top: 80px; /* Ajuste conforme necessário */
+}
+
+.banner img {
+    width: 100%;
+    height: 500px; /* Altura do banner ajustada */
+    object-fit: cover; /* Corta a imagem para caber no espaço sem distorção */
+}
+
+.texto-banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--branco);
+    background-color: var(--preto);
+    padding: 20px;
+}
+
+.texto-banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.texto-banner p {
+    font-size: 1.5rem;
+}
+
+/* Navegação */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: var(--Cinza-escuro);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main */
+main {
+    padding: 20px;
+    width: 100%;
+    height: 70%;
+}
+
+/* Seção de Produtos */
+#produtos-section {
+    margin-bottom: 20px;
+}
+
+#produtos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.produto {
+    background-color: var(--branco);
+    border: 1px solid var(--cinzaescuro);
+    padding: 10px;
+    width: calc(33.33% - 20px);
+}
+
+.produto h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.produto p {
+    margin-bottom: 10px;
+}
+
+.produto button {
+    background-color: var(--corprincipal);
+    color: var(--branco);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.produto button:hover {
+    background-color: var(--lavanda);
+}
+
+/* Modal de Customização */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--branco);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--cinzaescuro);
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content form label {
+    font-weight: bold;
+}
+
+.modal-content form input,
+.modal-content form select,
+.modal-content form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--cinzaescuro);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-content form button {
+    background-color: var(--corprincipal);
+    color: var(--branco);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.modal-content form button:hover {
+    background-color: var(--corsecundaria);
+}
+
+/* Tabela de Entregas */
+#entregas-section {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid var(--cinzaescuro);
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: var(--cinzaclaro);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .produto {
+        width: calc(50% - 20px);
+    }
+}
+
+/* Estilos para o footer */
+footer {
+    padding: 40px 0; /* Espaçamento interno superior e inferior */
+    background-color: var(--lavanda);
+    color: var(--Branco);
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+}
+
+/* Estilos gerais para o footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li i {
+    margin-right: 5px;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+.social-icons{
+    text-decoration: none;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Entregadores</title>
+</head>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #703C98;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    form {
+        width: auto;
+        height: auto;
+        max-width: 500px;
+        background-color: #C39BD3;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        color: #000000;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        color: #000000;
+        font-size: 1.2rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #000000;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #5D6D7E;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+        /* Garante que o padding não afete a largura total */
+    }
+
+    select {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #5D6D7E;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #C39BD3;
+        box-sizing: border-box;
+        /* Garante que o padding não afete a largura total */
+    }
+
+    input[type="submit"] {
+        background-color: #180623;
+        color: #C39BD3;
+        border: none;
+        padding: 15px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #7e8d85;
+        color: white;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group select {
+        padding: 12px;
+    }
+</style>
+</head>
+
+<body>
+    
+    <form>
+        <header>
+            <h1>Crie seu Cadastro!</h1>
+            <p>Preencha o formulário abaixo para se cadastrar em nosso site.</p>
+        </header>
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="text" id="senha" name="senha" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Número PIS">Número PIS:</label>
+            <input type="text" id="Número PIS" name="PIS" required>
+        </div>
+
+        <div class="form-group">
+            <label for="CPF">Número CPF:</label>
+            <input type="text" id="CPF" name="CPF" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cadastro-tipo">Cadastro como:</label>
+            <select id="cadastro-tipo" name="cadastro-tipo" required>
+                <option value="cliente">Cliente</option>
+                <option value="entregador">Entregador</option>
+            </select>
+        </div>
+
+        <div id="motoboy-fields" style="display: none;">
+            <div class="form-group">
+                <label for="veiculo">Veículo:</label>
+                <select id="veiculo" name="veiculo" required>
+                    <option value="">Selecione...</option>
+                    <option value="moto">Moto</option>
+                    <option value="bicicleta">Bicicleta</option>
+                    <option value="carro">Carro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="placa">Placa do Veículo (Se estiver):</label>
+                <input type="text" id="placa" name="placa">
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade de Atuação:</label>
+                <input type="text" id="cidade" name="cidade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="foto">Foto de perfil 3x4:</label>
+                <input type="file" id="foto" name="foto" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Cadastrar">
+        </div>
+        
+
+        
+    </form>
+</body>
+
+<script>
+    document.getElementById('cadastro-tipo').addEventListener('change', function () {
+        const motoboyFields = document.getElementById('motoboy-fields');
+        if (this.value === 'entregador') {
+            motoboyFields.style.display = 'block';
+        } else {
+            motoboyFields.style.display = 'none';
+        }
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Login realizado com sucesso!');
+        window.location.href = 'index.html';
+    });
+
+    document.getElementById('cadastro-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Cadastro realizado com sucesso!');
+        if (this.value === 'cliente') {
+            window.location.href = 'index.html';
+        } else {
+            window.location.href = 'motoboy.html';
+        }
+        // Redirecionar para a página apropriada após cadastro
+    });
+
+</script>
+
+</html>
